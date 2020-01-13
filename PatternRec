@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class PatternRec {
+
+    public static int amountOfValues = 0;
+    private static int[] array;
+
+    public static void main(String args[]) {
+        amountOfValuesMet();
+        values();
+        if(isConsecutiveFour(array))
+            System.out.println("The list has consecutive fours");
+        else
+            System.out.println("The list has no consecutive fours");
+
+    }
+
+    private static void amountOfValuesMet() {
+        System.out.print("Enter the number of values: ");
+        Scanner sc = new Scanner(System.in);
+        amountOfValues = sc.nextInt();
+    }
+
+    private static void values() {
+        array = new int[amountOfValues];
+        System.out.print("Enter values: ");
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < amountOfValues; i++)
+            array[i] = sc.nextInt();
+    }
+
+    private static boolean isConsecutiveFour(int[] values) {
+        int similarValues = 1;
+        int prevValue = 0;
+        boolean firstIteration = true;
+        for (int i = 0; i < array.length; i++) {
+            if (!firstIteration) {
+                if (prevValue == array[i])
+                    similarValues++;
+                else
+                    similarValues = 0;
+                prevValue = array[i];
+            } else {
+                prevValue = array[i];
+                firstIteration = false;
+            }
+            if(similarValues==4)
+                return true;
+        }
+        return false;
+    }
+}
